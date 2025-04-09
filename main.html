@@ -3,128 +3,697 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Optimus Prime Interface</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     body {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
-      font-family: 'Roboto', 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #4e9f3d, #34d7b7, #55c7f7);
-      background-size: 300% 300%;
-      animation: gradientAnimation 10s ease infinite;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
     }
-
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    
+    /* Background with Optimus Prime */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="black"/></svg>');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
     }
-
+    
+    /* Cybernetic grid overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, rgba(0,83,156,0.05) 1px, transparent 1px),
+        linear-gradient(rgba(0,83,156,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: -1;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      width: 100%;
+      max-width: 800px;
+      z-index: 1;
+    }
+    
+    /* Optimus Prime inspired header */
     h1 {
-      color: white;
-      font-size: 3.5rem;
+      color: #0052a5;
+      font-size: 2.8rem;
       margin-bottom: 40px;
       text-align: center;
       letter-spacing: 3px;
       text-transform: uppercase;
-      font-weight: 700;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      font-weight: 900;
+      text-shadow: 0 0 10px rgba(0, 162, 255, 0.7), 0 0 20px rgba(0, 162, 255, 0.5);
+      position: relative;
+      padding-bottom: 15px;
     }
-
+    
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, #cc0000, #0052a5, transparent);
+    }
+    
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 20px;
+    }
+    
     .btn {
       width: 250px;
       padding: 15px 25px;
-      margin: 10px;
-      background: transparent;
-      border-radius: 25px;
-      border: 2px solid #ffffff;
+      background: rgba(0, 82, 165, 0.2);
+      border-radius: 5px;
+      border: 2px solid #0052a5;
       font-size: 18px;
       font-weight: bold;
       text-transform: uppercase;
-      color: white;
+      color: #ffffff;
       text-align: center;
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 10px rgba(0, 162, 255, 0.5);
+      text-shadow: 0 0 5px rgba(0, 162, 255, 0.7);
+      letter-spacing: 1px;
     }
-
-    /* Add shine effect on hover */
+    
+    /* Energon glow effect */
     .btn::before {
       content: '';
       position: absolute;
       top: -50%;
       left: -50%;
-      height: 200%;
       width: 200%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: skewX(45deg);
-      transition: all 0.5s;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(0, 82, 165, 0), rgba(0, 162, 255, 0.7), rgba(0, 82, 165, 0));
+      transform: rotate(45deg);
+      animation: energonPulse 3s infinite linear;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
-
+    
     .btn:hover::before {
+      opacity: 1;
+    }
+    
+    @keyframes energonPulse {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) rotate(45deg); }
+    }
+    
+    .btn:hover {
+      background-color: rgba(0, 82, 165, 0.5);
+      box-shadow: 0 0 20px rgba(0, 162, 255, 0.8);
+      transform: scale(1.05);
+      border-color: #cc0000;
+    }
+    
+    .btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 0 15px rgba(0, 162, 255, 0.6);
+    }
+    
+    /* Autobots logo */
+    .autobots-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .autobots-logo svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 8px rgba(204, 0, 0, 0.8));
+    }
+    
+    /* Loading animation container */
+    .loading-container {
+      position: fixed;
       top: 0;
       left: 0;
+      width: 100%;
       height: 100%;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      transition: opacity 1.5s ease, visibility 1.5s;
+    }
+    
+    /* Transforming cube animation */
+    .cube-container {
+      width: 100px;
+      height: 100px;
+      perspective: 800px;
+      margin-bottom: 30px;
+    }
+    
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: spin 5s infinite linear;
+    }
+    
+    .cube-face {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #0052a5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 82, 165, 0.2);
+      box-shadow: 0 0 15px rgba(0, 162, 255, 0.5) inset;
+    }
+    
+    .face-front { transform: translateZ(50px); }
+    .face-back { transform: rotateY(180deg) translateZ(50px); }
+    .face-right { transform: rotateY(90deg) translateZ(50px); }
+    .face-left { transform: rotateY(-90deg) translateZ(50px); }
+    .face-top { transform: rotateX(90deg) translateZ(50px); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(50px); }
+    
+    @keyframes spin {
+      0% { transform: rotateX(0deg) rotateY(0deg); }
+      50% { transform: rotateX(180deg) rotateY(180deg); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+    
+    .loading-text {
+      font-size: 1.5rem;
+      letter-spacing: 3px;
+      color: #0052a5;
+      text-transform: uppercase;
+      margin-top: 20px;
+      animation: pulse 1.5s infinite alternate;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 162, 255, 0.7);
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    
+    .progress-bar {
+      width: 300px;
+      height: 10px;
+      background: rgba(0, 82, 165, 0.2);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+      border: 1px solid #0052a5;
+    }
+    
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #0052a5, #cc0000);
+      width: 0%;
+      animation: progress 3s forwards;
+    }
+    
+    @keyframes progress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+    
+    /* Matrix energy effects */
+    .matrix-energy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .energy-beam {
+      position: absolute;
+      background: linear-gradient(transparent, rgba(0, 162, 255, 0.1), transparent);
+      width: 1px;
+      top: 0;
+      height: 100%;
+      filter: blur(1px);
+    }
+    
+    /* Footer styles */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      border-top: 1px solid #0052a5;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 -5px 15px rgba(0, 82, 165, 0.3);
+      z-index: 10;
+    }
+    
+    .footer-content {
+      color: #0052a5;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      font-weight: 500;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    
+    .footer a {
+      color: #cc0000;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .footer a:hover {
+      color: #0052a5;
+      text-shadow: 0 0 8px rgba(0, 162, 255, 0.8);
+    }
+    
+    .footer a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #0052a5, #cc0000);
+      transition: width 0.3s ease;
+    }
+    
+    .footer a:hover::after {
       width: 100%;
     }
-
-    .btn:hover {
-      background-color: #ffffff;
-      color: #333;
-      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.5);
-      transform: scale(1.05);
+    
+    /* Glitch effect for header text */
+    .glitch-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px;
     }
-
-    .btn:active {
-      filter: brightness(0.9);
-      transform: scale(0.98);
+    
+    .glitch {
+      position: relative;
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: 5px;
+      color: #0052a5;
+      text-shadow: 0 0 10px rgba(0, 162, 255, 0.7);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
     }
-
-    /* Responsive Design */
+    
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      clip: rect(0, 900px, 0, 0);
+    }
+    
+    .glitch::before {
+      left: 2px;
+      text-shadow: 1px 0 #cc0000;
+      animation: glitch-anim-1 4s infinite linear alternate-reverse;
+    }
+    
+    .glitch::after {
+      left: -2px;
+      text-shadow: -1px 0 #0052a5;
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-anim {
+      0% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-2px);
+      }
+      40% {
+        transform: translateX(2px);
+      }
+      60% {
+        transform: translateX(-2px);
+      }
+      80% {
+        transform: translateX(2px);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes glitch-anim-1 {
+      0% {
+        clip: rect(20px, 9999px, 21px, 0);
+      }
+      10% {
+        clip: rect(125px, 9999px, 162px, 0);
+      }
+      20% {
+        clip: rect(10px, 9999px, 12px, 0);
+      }
+      30% {
+        clip: rect(54px, 9999px, 98px, 0);
+      }
+      40% {
+        clip: rect(15px, 9999px, 176px, 0);
+      }
+      50% {
+        clip: rect(156px, 9999px, 187px, 0);
+      }
+      60% {
+        clip: rect(5px, 9999px, 131px, 0);
+      }
+      70% {
+        clip: rect(120px, 9999px, 154px, 0);
+      }
+      80% {
+        clip: rect(34px, 9999px, 42px, 0);
+      }
+      90% {
+        clip: rect(107px, 9999px, 158px, 0);
+      }
+      100% {
+        clip: rect(49px, 9999px, 163px, 0);
+      }
+    }
+    
+    @keyframes glitch-anim-2 {
+      0% {
+        clip: rect(48px, 9999px, 95px, 0);
+      }
+      10% {
+        clip: rect(32px, 9999px, 15px, 0);
+      }
+      20% {
+        clip: rect(60px, 9999px, 73px, 0);
+      }
+      30% {
+        clip: rect(15px, 9999px, 176px, 0);
+      }
+      40% {
+        clip: rect(32px, 9999px, 49px, 0);
+      }
+      50% {
+        clip: rect(2px, 9999px, 31px, 0);
+      }
+      60% {
+        clip: rect(41px, 9999px, 73px, 0);
+      }
+      70% {
+        clip: rect(48px, 9999px, 154px, 0);
+      }
+      80% {
+        clip: rect(89px, 9999px, 125px, 0);
+      }
+      90% {
+        clip: rect(42px, 9999px, 83px, 0);
+      }
+      100% {
+        clip: rect(12px, 9999px, 15px, 0);
+      }
+    }
+    
+    /* Responsive design */
     @media (max-width: 600px) {
       h1 {
-        font-size: 2.2rem;
+        font-size: 1.8rem;
       }
+      
       .btn {
-        width: 80%;
+        width: 220px;
         padding: 12px 20px;
         font-size: 16px;
       }
-    }
-
-    @media (min-width: 600px) and (max-width: 1024px) {
-      h1 {
-        font-size: 2.8rem;
+      
+      .autobots-logo {
+        width: 80px;
+        height: 80px;
       }
-      .btn {
-        width: 220px;
-        padding: 14px 22px;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      h1 {
-        font-size: 3.5rem;
-      }
-      .btn {
+      
+      .progress-bar {
         width: 250px;
-        padding: 15px 25px;
+      }
+      
+      .glitch {
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+      }
+      
+      .footer-content {
+        font-size: 0.8rem;
       }
     }
-
+    
+    @media (min-width: 601px) and (max-width: 1024px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .glitch {
+        font-size: 2.2rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div class="loading-container" id="loadingScreen">
+    <div class="cube-container">
+      <div class="cube">
+        <div class="cube-face face-front">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <path d="M50 5 L95 45 L75 95 L25 95 L5 45 Z" fill="none" stroke="#cc0000" stroke-width="3"></path>
+            <path d="M50 15 L85 45 L70 85 L30 85 L15 45 Z" fill="none" stroke="#0052a5" stroke-width="3"></path>
+          </svg>
+        </div>
+        <div class="cube-face face-back">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#cc0000" stroke-width="3"></circle>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="#0052a5" stroke-width="3"></circle>
+          </svg>
+        </div>
+        <div class="cube-face face-right">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <rect x="20" y="20" width="60" height="60" fill="none" stroke="#cc0000" stroke-width="3"></rect>
+            <rect x="35" y="35" width="30" height="30" fill="none" stroke="#0052a5" stroke-width="3"></rect>
+          </svg>
+        </div>
+        <div class="cube-face face-left">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <line x1="20" y1="20" x2="80" y2="80" stroke="#cc0000" stroke-width="3"></line>
+            <line x1="80" y1="20" x2="20" y2="80" stroke="#0052a5" stroke-width="3"></line>
+          </svg>
+        </div>
+        <div class="cube-face face-top">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <polygon points="50,20 80,50 50,80 20,50" fill="none" stroke="#cc0000" stroke-width="3"></polygon>
+            <polygon points="50,35 65,50 50,65 35,50" fill="none" stroke="#0052a5" stroke-width="3"></polygon>
+          </svg>
+        </div>
+        <div class="cube-face face-bottom">
+          <svg width="60" height="60" viewBox="0 0 100 100">
+            <path d="M30,30 Q50,10 70,30 Q90,50 70,70 Q50,90 30,70 Q10,50 30,30" fill="none" stroke="#0052a5" stroke-width="3"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="loading-text">INITIATING SYSTEMS</div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+  </div>
 
-  <button onclick="window.open(`/qr`)" class="btn">QR Code</button>
-  <button onclick="window.open(`/pair`)" class="btn">Pair Code</button>
-  <button onclick="window.open(`https://github.com/GlobalTechInfo`)" class="btn">GitHub</button>
-  <button onclick="window.open(`https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07`)" class="btn">WhatsApp</button>
-
+  <!-- Main Content -->
+  <div class="container">
+    <div class="autobots-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+        <path d="M100,30 L120,50 L120,80 L140,100 L120,120 L120,150 L100,170 L80,150 L80,120 L60,100 L80,80 L80,50 Z" 
+              fill="none" stroke="#cc0000" stroke-width="5"/>
+        <circle cx="100" cy="70" r="8" fill="#0052a5"/>
+        <circle cx="100" cy="130" r="8" fill="#0052a5"/>
+        <path d="M70,100 L130,100" stroke="#0052a5" stroke-width="5"/>
+      </svg>
+    </div>
+    
+    <!-- Glitching header text -->
+    <div class="glitch-wrapper">
+      <div id="glitchText" class="glitch" data-text="FRANK TECH">FRANK TECH</div>
+    </div>
+    
+    <h1>Autobots Interface</h1>
+    
+    <div class="buttons-container">
+      <button onclick="window.open(`/qr`)" class="btn">QR Code</button>
+      <button onclick="window.open(`/pair`)" class="btn">Pair Code</button>
+      <button onclick="window.open(`https://github.com/efkidgamerdev`)" class="btn">GitHub</button>
+      <button onclick="window.open(`https://whatsapp.com/channel/0029Vb5xaN6Chq6HbdmixE44`)" class="btn">WhatsApp</button>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      FRANKKAUMBADEV INC &copy; 2025 | <a href="https://facebook.com/efkidtrapgamer" target="_blank">VISIT COMMAND CENTER</a>
+    </div>
+  </footer>
+  
+  <!-- Matrix energy effect -->
+  <div class="matrix-energy" id="matrixEnergy"></div>
+  
+  <script>
+    // Create matrix energy beams
+    const matrixEnergy = document.getElementById('matrixEnergy');
+    const beamCount = 30;
+    
+    for (let i = 0; i < beamCount; i++) {
+      const beam = document.createElement('div');
+      beam.className = 'energy-beam';
+      beam.style.left = `${Math.random() * 100}%`;
+      beam.style.opacity = Math.random() * 0.5 + 0.1;
+      beam.style.width = `${Math.random() * 3 + 1}px`;
+      beam.style.animationDuration = `${Math.random() * 5 + 3}s`;
+      matrixEnergy.appendChild(beam);
+    }
+    
+    // Loading screen handler
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+      }, 3000); // 3-second loading screen
+    });
+    
+    // Create dynamic beams
+    function createBeams() {
+      if (document.getElementById('loadingScreen').style.visibility === 'hidden') {
+        const beam = document.createElement('div');
+        beam.className = 'energy-beam';
+        beam.style.left = `${Math.random() * 100}%`;
+        beam.style.opacity = Math.random() * 0.3 + 0.05;
+        beam.style.width = `${Math.random() * 2 + 0.5}px`;
+        matrixEnergy.appendChild(beam);
+        
+        // Remove the beam after animation
+        setTimeout(() => {
+          if (beam.parentNode === matrixEnergy) {
+            matrixEnergy.removeChild(beam);
+          }
+        }, 5000);
+      }
+    }
+    
+    // Create beams periodically
+    setInterval(createBeams, 300);
+    
+    // Glitching text effect
+    const glitchText = document.getElementById('glitchText');
+    const originalText = "FRANK TECH";
+    const alternateText = "EF-PRIME-MD";
+    let isOriginal = true;
+    
+    function glitchTextEffect() {
+      // Random glitch effect
+      if (Math.random() > 0.7) {
+        glitchText.style.transform = `translate(${(Math.random() * 4) - 2}px, ${(Math.random() * 4) - 2}px)`;
+        
+        // Randomly change text
+        if (Math.random() > 0.8) {
+          // Create glitched text
+          let chars = isOriginal ? originalText.split('') : alternateText.split('');
+          for (let i = 0; i < chars.length; i++) {
+            if (Math.random() > 0.85) {
+              chars[i] = String.fromCharCode(33 + Math.floor(Math.random() * 94));
+            }
+          }
+          glitchText.innerText = chars.join('');
+          
+          // Reset after short delay
+          setTimeout(() => {
+            glitchText.innerText = isOriginal ? originalText : alternateText;
+          }, 100);
+        }
+      } else {
+        glitchText.style.transform = 'translate(0, 0)';
+      }
+    }
+    
+    // Switch between texts periodically
+    function switchText() {
+      // Apply heavy glitch effect during transition
+      let glitchInterval = setInterval(glitchTextEffect, 50);
+      
+      // After some glitching, change the text
+      setTimeout(() => {
+        clearInterval(glitchInterval);
+        isOriginal = !isOriginal;
+        glitchText.innerText = isOriginal ? originalText : alternateText;
+        glitchText.setAttribute('data-text', isOriginal ? originalText : alternateText);
+      }, 1000);
+    }
+    
+    // Regular small glitches
+    setInterval(glitchTextEffect, 200);
+    
+    // Switch text every 5 seconds
+    setInterval(switchText, 5000);
+  </script>
 </body>
 </html>
