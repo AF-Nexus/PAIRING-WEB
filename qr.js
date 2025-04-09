@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const { upload } = require('./mega');
+const { upload } = require('./paste');
 const express = require('express');
 let router = express.Router()
 const pino = require("pino");
@@ -13,20 +13,17 @@ const fs = require("fs-extra");
 const { Boom } = require("@hapi/boom");
 
 const MESSAGE = process.env.MESSAGE ||  `
-*SESSION GENERATED SUCCESSFULY* ✅
 
-*Gɪᴠᴇ ᴀ ꜱᴛᴀʀ ᴛᴏ ʀᴇᴘᴏ ꜰᴏʀ ᴄᴏᴜʀᴀɢᴇ* 🌟
-https://github.com/GuhailTechInfo/ULTRA-MD
+*EF-PRIME AUTHENTICATION MATRIX ACTIVATED*
 
-*Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ ꜰᴏʀ ϙᴜᴇʀʏ* 💭
-https://t.me/GlobalBotInc
-https://whatsapp.com/channel/0029VagJIAr3bbVBCpEkAM07
+AUTOBOTS, YOUR SESSION ID HAS BEEN SECURED.
+KEEP THIS CODE CONFIDENTIAL - DO NOT SHARE WITH ANY DECEPTICONS.
 
+> CYBERTRON COMMAND CENTER
+https://whatsapp.com/channel/0029Vb5xaN6Chq6HbdmixE44
 
-*Yᴏᴜ-ᴛᴜʙᴇ ᴛᴜᴛᴏʀɪᴀʟꜱ* 🪄 
-https://youtube.com/GlobalTechInfo
+"FREEDOM IS THE RIGHT OF ALL SENTIENT BEINGS."
 
-*ULTRA-MD--WHATTSAPP-BOT* 🥀
 `
 
 
