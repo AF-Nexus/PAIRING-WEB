@@ -1,5 +1,5 @@
 const { exec } = require("child_process");
-const { upload } = require('./paste');
+const { upload } = require('./Paste');
 const express = require('express');
 let router = express.Router()
 const pino = require("pino");
