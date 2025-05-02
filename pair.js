@@ -5,19 +5,20 @@ let router = express.Router();
 const pino = require("pino");
 const { Boom } = require("@hapi/boom");
 const MESSAGE = process.env.MESSAGE || `
+*⚡ AUTOBOTS AUTHENTICATION SUCCESSFUL ⚡*
 
-*EF-PRIME AUTHENTICATION MATRIX ACTIVATED*
+🔒 YOUR CYBERTRON ACCESS CODE IS SECURE 🔒
+✨ KEEP THIS CODE CONFIDENTIAL - DECEPTICONS ARE WATCHING ✨
 
-AUTOBOTS, YOUR SESSION ID HAS BEEN SECURED.
-KEEP THIS CODE CONFIDENTIAL - DO NOT SHARE WITH ANY DECEPTICONS.
-
-> CYBERTRON COMMAND CENTER
+🤖 *OPTIMUS PRIME COMMAND CENTER* 🤖
 https://whatsapp.com/channel/0029Vb5xaN6Chq6HbdmixE44
 
-"FREEDOM IS THE RIGHT OF ALL SENTIENT BEINGS."
+🌟 "TILL ALL ARE ONE" 🌟
+
+🛡️ *FREEDOM IS THE RIGHT OF ALL SENTIENT BEINGS* 🛡️
 `;
 
-const uploadToPastebin = require('./Paste');  // Assuming you have a function to upload to Pastebin
+const uploadToPastebin = require('./Paste');
 const {
     default: makeWASocket,
     useMultiFileAuthState,
@@ -27,7 +28,6 @@ const {
     DisconnectReason
 } = require("@whiskeysockets/baileys");
 
-// Ensure the directory is empty when the app starts
 if (fs.existsSync('./auth_info_baileys')) {
     fs.emptyDirSync(__dirname + '/auth_info_baileys');
 }
@@ -69,14 +69,11 @@ router.get('/', async (req, res) => {
                         const auth_path = './auth_info_baileys/';
                         let user = Smd.user.id;
 
-                        // Upload the creds.json to Pastebin directly
                         const credsFilePath = auth_path + 'creds.json';
                         const pastebinUrl = await uploadToPastebin(credsFilePath, 'creds.json', 'json', '1');
 
-                        // Format the session ID as requested
                         const formattedSessionId = `EF-PRIME~${pastebinUrl}`;
 
-                        // Send the formatted session ID to the user
                         let msgsss = await Smd.sendMessage(user, { text: formattedSessionId });
                         await Smd.sendMessage(user, { text: MESSAGE }, { quoted: msgsss });
                         await delay(1000);
@@ -90,7 +87,6 @@ router.get('/', async (req, res) => {
                     await fs.emptyDirSync(__dirname + '/auth_info_baileys');
                 }
 
-                // Handle connection closures
                 if (connection === "close") {
                     let reason = new Boom(lastDisconnect?.error)?.output.statusCode;
                     if (reason === DisconnectReason.connectionClosed) {
