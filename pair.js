@@ -70,9 +70,9 @@ router.get('/', async (req, res) => {
                         let user = Smd.user.id;
 
                         const credsFilePath = auth_path + 'creds.json';
-                        const pastebinUrl = await uploadToPastebin(credsFilePath, 'creds.json', 'json', '1');
-
-                        const formattedSessionId = `EF-PRIME~${pastebinUrl}`;
+                        const sessionData = await uploadToPastebin(credsFilePath, 'creds.json', 'json', '1');
+                        
+                        const formattedSessionId = `EF-PRIME-MD~${sessionData.replace('Some-Custom-Words_', '')}`;
 
                         let msgsss = await Smd.sendMessage(user, { text: formattedSessionId });
                         await Smd.sendMessage(user, { text: MESSAGE }, { quoted: msgsss });
